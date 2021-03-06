@@ -18,7 +18,7 @@ class LandingPage extends StatelessWidget {
             return SignInView.create(context);
           }
           return Provider<Database>(
-            create: (_) => FirestoreDatabase(uid: user.uid),
+            create: (_) => FirebaseDatabase(uid: user.uid),
             child: JobsPage(
               auth: auth,
             ),
