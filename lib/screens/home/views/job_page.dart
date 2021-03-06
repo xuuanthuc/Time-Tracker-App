@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:time_tracker_app/services/auth.dart';
 
-class HomeScreen extends StatelessWidget {
+class JobsPage extends StatelessWidget {
   final AuthBase auth;
 
-  HomeScreen({@required this.auth});
+  JobsPage({@required this.auth});
 
   Future<void> _signOut() async {
     try {
@@ -42,7 +42,8 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Home Screen'),
+        centerTitle: true,
+        title: Text('Jobs'),
         actions: [
           FlatButton.icon(
             icon: Icon(
