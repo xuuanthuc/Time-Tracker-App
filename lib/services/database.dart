@@ -6,21 +6,21 @@ import 'package:time_tracker_app/services/firestore_services.dart';
 import 'api_path.dart';
 
 abstract class Database {
-  Future<void> createJobs(Job job);
+  Future<void> setJobs(Job job);
 
   Stream<List<Job>> jobsStream();
 }
-
+String documentIdformCurrentDate() => DateTime.now().toIso8601String();
 class FirebaseDatabase implements Database {
   FirebaseDatabase({
     @required this.uid,
   }) : assert(uid != null);
   final String uid;
   final _services = FirestoreService.instance;
-  String documentIdformCurrentDate() => DateTime.now().toIso8601String();
+
 
   Stream<List<Job>> jobsStream() => _services.collectionStream(
-      path: APIPath.jobs(uid), builder: (data) => Job.fromMap(data));
+      path: APIPath.jobs(uid), builder: (data, documentId) => Job.fromMap(data, documentId));
 
   // {
   //   final path = APIPath.jobs(uid);
@@ -36,7 +36,7 @@ class FirebaseDatabase implements Database {
   //   // snapshots.listen((event) {event.documents.forEach((element) {print(element.data);});});
   // }
 
-  Future<void> createJobs(Job job) async
+  Future<void> setJobs(Job job) async
       // {
       //   final path = APIPath.job(uid, 'job_123');
       //
@@ -45,7 +45,7 @@ class FirebaseDatabase implements Database {
       //   await documentReference.setData(job.toMap());
       // }
       =>
-      await _setData(path: APIPath.job(uid, documentIdformCurrentDate() ), data: job.toMap());
+      await _setData(path: APIPath.job(uid,job.id ), data: job.toMap());
 
   Future<void> _setData({String path, Map<String, dynamic> data}) async {
     final reference = Firestore.instance.document(path);
