@@ -17,6 +17,7 @@ class FirebaseDatabase implements Database {
   }) : assert(uid != null);
   final String uid;
   final _services = FirestoreService.instance;
+  String documentIdformCurrentDate() => DateTime.now().toIso8601String();
 
   Stream<List<Job>> jobsStream() => _services.collectionStream(
       path: APIPath.jobs(uid), builder: (data) => Job.fromMap(data));
@@ -44,7 +45,7 @@ class FirebaseDatabase implements Database {
       //   await documentReference.setData(job.toMap());
       // }
       =>
-      await _setData(path: APIPath.job(uid, DateTime.now().toString()), data: job.toMap());
+      await _setData(path: APIPath.job(uid, documentIdformCurrentDate() ), data: job.toMap());
 
   Future<void> _setData({String path, Map<String, dynamic> data}) async {
     final reference = Firestore.instance.document(path);

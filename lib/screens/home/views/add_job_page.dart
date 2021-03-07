@@ -42,9 +42,25 @@ class _AddJobPageState extends State<AddJobPage> {
     if (_validateAndSaveForm()) {
       //TODO: submit data to Firestore
       try {
-        final job = Job(name: _name, rateHour: _rateHour);
-        await widget.database.createJobs(job);
-        Navigator.of(context).pop();
+        final jobs = await widget.database.jobsStream().first;
+        final allName = jobs.map((e) => e.name).toList();
+        if (allName.contains(_name)) {
+          showDialog(
+              context: (context),
+              builder: (context) => AlertDialog(
+                    title: Text('Name already used'),
+                    content: Text('Please choose a different job name'),
+                    actions: [
+                      FlatButton(
+                          onPressed: () => Navigator.of(context).pop(),
+                          child: Text('OK'))
+                    ],
+                  ));
+        } else {
+          final job = Job(name: _name, rateHour: _rateHour);
+          await widget.database.createJobs(job);
+          Navigator.of(context).pop();
+        }
       } on PlatformException catch (error) {
         showDialog(
             context: (context),
@@ -113,7 +129,7 @@ class _AddJobPageState extends State<AddJobPage> {
         decoration: InputDecoration(labelText: 'Job hour'),
         keyboardType:
             TextInputType.numberWithOptions(signed: false, decimal: false),
-        onSaved: (value) => _rateHour = int.parse(value),
+        onSaved: (value) => _rateHour = int.tryParse(value) ?? 0,
       ),
     ];
   }

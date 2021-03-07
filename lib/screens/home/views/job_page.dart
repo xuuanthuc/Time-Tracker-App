@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:time_tracker_app/models/job.dart';
 import 'package:time_tracker_app/screens/home/views/add_job_page.dart';
+import 'package:time_tracker_app/screens/home/widgets/job_list_tile.dart';
 import 'package:time_tracker_app/services/auth.dart';
 import 'package:time_tracker_app/services/database.dart';
 
@@ -82,7 +82,14 @@ Widget _buildContent(BuildContext context) {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           final jobs = snapshot.data;
-          final children = jobs.map((e) => Text(e.name)).toList();
+          final children = jobs
+              .map((e) => JobListTile(
+                    job: e,
+                    onTap: () {
+
+                    },
+                  ))
+              .toList();
           return ListView(
             children: children,
           );
