@@ -7,10 +7,15 @@ class JobListTile extends StatelessWidget {
   const JobListTile({Key key,@required this.job, this.onTap}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      title: Text(job.name),
-      trailing: Icon(Icons.arrow_right),
-      onTap: onTap,
+    return Column(
+      children: [
+        ListTile(
+          title: Text(job.name),
+          trailing: Icon(Icons.arrow_right),
+          onTap: onTap,
+        ),
+        Divider(),
+      ],
     );
   }
 }

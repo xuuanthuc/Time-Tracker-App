@@ -11,8 +11,12 @@ class FirestoreService {
     print('$path: $data');
     await reference.setData(data);
   }
+  Future<void> delete({String path}) async {
+    final reference = Firestore.instance.document(path);
+await reference.delete();
+  }
 
-  Stream<List<T>> collectionStream<T>({
+    Stream<List<T>> collectionStream<T>({
     @required String path,
     @required T builder(Map<String, dynamic> data, String documentId),
   }) {
