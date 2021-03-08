@@ -9,8 +9,7 @@ class EditJobPage extends StatefulWidget {
 
   const EditJobPage({Key key, this.database, this.job}) : super(key: key);
   final Job job;
-  static Future<void> show(BuildContext context, {Job job}) async {
-    final database = Provider.of<Database>(context);
+  static Future<void> show(BuildContext context, {Database database,Job job}) async {
     await Navigator.of(context).push(MaterialPageRoute(
       fullscreenDialog: true,
       builder: (context) => EditJobPage(
@@ -71,7 +70,7 @@ class _EditJobPageState extends State<EditJobPage> {
                     ],
                   ));
         } else {
-          final id = widget.job?.id ?? documentIdformCurrentDate();
+          final id = widget.job?.id ?? documentIdFromCurrentDate();
           final job = Job(id: id,name: _name, rateHour: _rateHour);
           await widget.database.setJobs(job);
           Navigator.of(context).pop();

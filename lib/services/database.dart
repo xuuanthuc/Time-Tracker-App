@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:time_tracker_app/models/entry.dart';
 import 'package:time_tracker_app/models/job.dart';
 import 'package:time_tracker_app/services/firestore_services.dart';
 
@@ -11,8 +12,14 @@ abstract class Database {
   Stream<List<Job>> jobsStream();
 
   Future<void> delete(Job job);
+
+  Future<void> setEntry(Entry entry);
+
+  Future<void> deleteEntry(Entry entry);
+
+  Stream<List<Entry>> entriesStream({Job job});
 }
-String documentIdformCurrentDate() => DateTime.now().toIso8601String();
+String documentIdFromCurrentDate() => DateTime.now().toIso8601String();
 class FirebaseDatabase implements Database {
   FirebaseDatabase({
     @required this.uid,
@@ -53,4 +60,22 @@ class FirebaseDatabase implements Database {
     final reference = Firestore.instance.document(path);
     await reference.setData(data);
   }
+
+  //Entry
+  @override
+  Future<void> setEntry(Entry entry) async => await _services.setData(
+    path: APIPath.entry(uid, entry.id),
+    data: entry.toMap(),
+  );
+
+  @override
+  Future<void> deleteEntry(Entry entry) async => await _services.delete(path: APIPath.entry(uid, entry.id));
+
+  @override
+  Stream<List<Entry>> entriesStream({Job job}) => _services.collectionStream<Entry>(
+    path: APIPath.entries(uid),
+    queryBuilder: job != null ? (query) => query.where('jobId', isEqualTo: job.id) : null,
+    builder: (data, documentID) => Entry.fromMap(data, documentID),
+    sort: (lhs, rhs) => rhs.start.compareTo(lhs.start),
+  );
 }
