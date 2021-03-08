@@ -1,9 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:time_tracker_app/models/entry.dart';
-import 'package:time_tracker_app/models/job.dart';
-import 'package:time_tracker_app/services/firestore_services.dart';
-
+import '../models/entry.dart';
+import '../models/job.dart';
+import 'firestore_services.dart';
 import 'api_path.dart';
 
 abstract class Database {

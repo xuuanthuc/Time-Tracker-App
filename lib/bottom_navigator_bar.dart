@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:time_tracker_app/screens/home/views/job_page.dart';
-import 'package:time_tracker_app/services/auth.dart';
-
-import 'landing_page.dart';
+import 'screens/home/views/job_page.dart';
+import 'services/auth.dart';
 import 'screens/account/views/landing_page_account.dart';
 class BottomNavigator extends StatefulWidget {
   final AuthBase auth;

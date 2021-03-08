@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
 import 'package:time_tracker_app/models/job.dart';
 import 'package:time_tracker_app/services/database.dart';
 
