@@ -9,9 +9,6 @@ import 'package:time_tracker_app/services/auth.dart';
 import 'package:time_tracker_app/services/database.dart';
 
 class JobsPage extends StatelessWidget {
-  final AuthBase auth;
-
-  JobsPage({@required this.auth});
 
   @override
   Widget build(BuildContext context) {

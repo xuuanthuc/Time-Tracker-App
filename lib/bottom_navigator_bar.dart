@@ -1,27 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:time_tracker_app/screens/account/views/account_page.dart';
-import 'package:time_tracker_app/screens/home/landing_page.dart';
+
+import 'package:time_tracker_app/screens/home/views/job_page.dart';
 import 'package:time_tracker_app/services/auth.dart';
 
+import 'landing_page.dart';
 import 'screens/account/views/landing_page_account.dart';
 class BottomNavigator extends StatefulWidget {
   final AuthBase auth;
-
   BottomNavigator({this.auth});
   @override
   _BottomNavigatorState createState() => _BottomNavigatorState();
 }
 
 class _BottomNavigatorState extends State<BottomNavigator> {
+
   int _selectedIndex = 0;
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
   }
-  final List<Widget> _widgetOptions = <Widget>[
-    LandingPage(),
-    LandingPage(),
+  final List<Widget> _widgetOptions = [
+    JobsPage(),
+    JobsPage(),
     LandingPageAccount(),
   ];
 

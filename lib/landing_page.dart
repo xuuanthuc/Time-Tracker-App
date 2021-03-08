@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:time_tracker_app/bottom_navigator_bar.dart';
 import 'package:time_tracker_app/screens/authentication/views/sign_in_view.dart';
 import 'package:time_tracker_app/screens/home/views/job_page.dart';
 import 'package:time_tracker_app/services/auth.dart';
@@ -19,7 +20,7 @@ class LandingPage extends StatelessWidget {
           }
           return Provider<Database>(
             create: (_) => FirebaseDatabase(uid: user.uid),
-            child: JobsPage(
+            child: BottomNavigator(
               auth: auth,
             ),
           );
