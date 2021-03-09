@@ -6,20 +6,19 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 class User {
   final String uid;
+  final String photoUrl;
+  final String displayName;
 
-  User({@required this.uid});
+  User({@required this.uid, this.displayName, this.photoUrl});
 }
 
 abstract class AuthBase {
-
-
   Stream<User> get onAuthStateChanged;
 
   Future<User> currentAuth();
 
-
-
   Future<void> signOut();
+
   Future<User> signInWithAnonymously();
 
   Future<User> signInWithGoogle();
@@ -38,7 +37,11 @@ class Auth implements AuthBase {
     if (user == null) {
       return null;
     }
-    return User(uid: user.uid);
+    return User(
+      uid: user.uid,
+      photoUrl: user.photoUrl,
+      displayName: user.displayName,
+    );
   }
 
   @override
@@ -110,14 +113,18 @@ class Auth implements AuthBase {
       );
     }
   }
+
   @override
-  Future<User> signInWithEmailAndPassword(String email, String password) async{
-    final authResult = await _firebaseAuth.signInWithEmailAndPassword(email: email, password: password);
+  Future<User> signInWithEmailAndPassword(String email, String password) async {
+    final authResult = await _firebaseAuth.signInWithEmailAndPassword(
+        email: email, password: password);
     _userFromFirebase(authResult.user);
   }
+
   @override
-  Future<User> createWithEmailAndPassword(String email, String password) async{
-    final authResult = await _firebaseAuth.createUserWithEmailAndPassword(email: email, password: password);
+  Future<User> createWithEmailAndPassword(String email, String password) async {
+    final authResult = await _firebaseAuth.createUserWithEmailAndPassword(
+        email: email, password: password);
     _userFromFirebase(authResult.user);
   }
 

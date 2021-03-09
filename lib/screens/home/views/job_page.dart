@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:time_tracker_app/models/job.dart';
-import 'package:time_tracker_app/screens/entries/views/job_entries_page.dart';
+import 'file:///G:/Flutter%20Project/time_tracker_app/lib/screens/home/views/job_entries_page.dart';
 import 'package:time_tracker_app/screens/home/views/edit_job_page.dart';
 import 'package:time_tracker_app/screens/home/widgets/job_list_tile.dart';
 import 'package:time_tracker_app/screens/home/widgets/list_job_builder.dart';
@@ -48,7 +48,7 @@ Widget _buildContent(BuildContext context) {
                   context: context,
                   builder: (ctx) => AlertDialog(
                         title: Text('Are you sure??'),
-                        content: Text('Delete your order!'),
+                        content: Text('Delete your job!'),
                         actions: [
                           FlatButton(
                               onPressed: () {

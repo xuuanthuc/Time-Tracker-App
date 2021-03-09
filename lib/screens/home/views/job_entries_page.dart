@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:flutter/services.dart';
 import 'package:time_tracker_app/models/entry.dart';
 import 'package:time_tracker_app/models/job.dart';
-import 'package:time_tracker_app/screens/entries/widgets/entry_list_item.dart';
+import 'file:///G:/Flutter%20Project/time_tracker_app/lib/screens/home/widgets/entry_list_item.dart';
 import 'package:time_tracker_app/screens/home/views/edit_job_page.dart';
 import 'package:time_tracker_app/screens/home/widgets/list_job_builder.dart';
 import 'package:time_tracker_app/services/database.dart';

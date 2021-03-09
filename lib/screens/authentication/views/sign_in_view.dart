@@ -59,6 +59,8 @@ class SignInView extends StatelessWidget {
     final bloc = Provider.of<SignInBloc>(context);
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
+        elevation: 0,
         title: Text("Time Tracker"),
       ),
       body: StreamBuilder(

@@ -17,10 +17,13 @@ class LandingPage extends StatelessWidget {
           if (user == null) {
             return SignInView.create(context);
           }
-          return Provider<Database>(
-            create: (_) => FirebaseDatabase(uid: user.uid),
-            child: BottomNavigator(
-              auth: auth,
+          return Provider<User>.value(
+            value: user,
+            child: Provider<Database>(
+              create: (_) => FirebaseDatabase(uid: user.uid),
+              child: BottomNavigator(
+                auth: auth,
+              ),
             ),
           );
         } else {

@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:time_tracker_app/models/entry.dart';
 import 'package:time_tracker_app/models/job.dart';
-import 'package:time_tracker_app/screens/entries/widgets/date_time_picker.dart';
-import 'package:time_tracker_app/screens/entries/widgets/format.dart';
+import 'file:///G:/Flutter%20Project/time_tracker_app/lib/screens/home/widgets/date_time_picker.dart';
+import '../widgets/format.dart';
 import 'package:time_tracker_app/services/database.dart';
 
 
